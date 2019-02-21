@@ -10,6 +10,7 @@ import 'package:buoy/reducers/app_reducer.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  
   final store = new Store<AppState>(
     appReducer,
     initialState: new AppState(),

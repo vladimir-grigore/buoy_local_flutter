@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+
 import 'package:buoy/Components/tab_container.dart';
 import 'package:buoy/Components/buoy_header.dart';
+import 'package:buoy/model/AppState.dart';
+import 'package:buoy/Components/view_model.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -16,27 +20,30 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.indigo.shade700,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            BuoyHeader(points: points, redeemed: redeemed),
-            TabContainer(
-              points: points,
-              onPointsRedeem: (newValue) {
-                setState(() {
-                  redeemed = newValue;
-                });
-              },
+    return new StoreConnector<AppState, ViewModel>(
+      converter: ViewModel.fromStore,
+      builder: (BuildContext context, ViewModel vm) {
+        return new Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.indigo.shade700,
+            title: Text(widget.title),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                BuoyHeader(points: vm.points, redeemed: vm.redeemed),
+                TabContainer(
+                  points: vm.points,
+                  onPointsRedeem: (newValue) {
+                    vm.modifySlider(newValue);
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

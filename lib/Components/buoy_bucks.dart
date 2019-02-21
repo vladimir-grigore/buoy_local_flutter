@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+
+import 'package:buoy/model/AppState.dart';
+import 'package:buoy/Components/view_model.dart';
+
+class BuoyBucks extends StatelessWidget {
+  BuoyBucks({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context){
+    return new StoreConnector<AppState, ViewModel>(
+      converter: ViewModel.fromStore,
+      builder: (BuildContext context, ViewModel vm){
+        return Stack(
+          alignment: Alignment.bottomCenter,
+          children: <Widget>[
+            GestureDetector(
+              onTap: (){ print("Buoy Bucks clicked"); },
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 15.0),
+                width: MediaQuery.of(context).size.width / 3,
+                child: Image.asset(
+                  'images/buoy-bucks-container.png', 
+                  fit: BoxFit.fitWidth, 
+                  height: MediaQuery.of(context).size.height / 6,
+                  ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 35),
+              child: Text("\$${vm.buoyBucks.toString()}", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

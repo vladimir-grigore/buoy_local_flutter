@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:buoy/Components/buoy_local_card.dart';
+import 'package:buoy/Components/buoy_bucks.dart';
 
-class EarnPage extends StatefulWidget {
-  EarnPage({ Key key }) : super(key: key);
-
-  @override
-  _EarnPageState createState() => _EarnPageState();
-}
-
-class _EarnPageState extends State<EarnPage> {
-  final buoyBucks = 12.51;
-  bool status = true;
+class EarnPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -76,28 +68,8 @@ class _EarnPageState extends State<EarnPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Stack(
-                alignment: Alignment.bottomCenter,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: (){ print("Buoy Bucks clicked"); },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 15.0),
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Image.asset(
-                        'images/buoy-bucks-container.png', 
-                        fit: BoxFit.fitWidth, 
-                        height: MediaQuery.of(context).size.height / 6,
-                        ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 35),
-                    child: Text('\$$buoyBucks', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600)),
-                  ),
-                ],
-              ),
-              Container(
+              BuoyBucks(),
+              Container( //Vertical divider
                 height: 130.0,
                 width: 1.0,
                 color: Colors.black12,

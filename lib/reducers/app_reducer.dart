@@ -23,19 +23,9 @@ AppState redeemPoints(AppState state, RedeemPointsAction action) {
 }
 
 AppState toggleCardLock(AppState state) {
-  return new AppState(
-    points: state.points,
-    redeemed: state.redeemed,
-    buoyBucks: state.buoyBucks,
-    cardLockStatus: !state.cardLockStatus,
-  );
+  return state.copyWith(cardLockStatus: !state.cardLockStatus);
 }
 
 AppState modifySlider(AppState state, PointsSliderAction action) {
-  return new AppState(
-    points: state.points,
-    redeemed: state.redeemed,
-    buoyBucks: state.buoyBucks,
-    cardLockStatus: !state.cardLockStatus,
-  );
+  return state.copyWith(redeemed: action.newValue);
 }

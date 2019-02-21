@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
-import 'package:buoy/actions/buoy_actions.dart';
 import 'package:buoy/model/AppState.dart';
+import 'package:buoy/Components/view_model.dart';
 
 class BuoyLocalCardAndSwitch extends StatelessWidget {
   BuoyLocalCardAndSwitch({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector<AppState, _ViewModel>(
-      converter: _ViewModel.fromStore,
-      builder: (BuildContext context, _ViewModel vm) {
+    return new StoreConnector<AppState, ViewModel>(
+      converter: ViewModel.fromStore,
+      builder: (BuildContext context, ViewModel vm) {
         return Column(
           children: <Widget>[
             GestureDetector(
@@ -49,20 +48,6 @@ class BuoyLocalCardAndSwitch extends StatelessWidget {
           ],
         );
       },
-    );
-  }
-}
-
-class _ViewModel {
-  final bool cardLockStatus;
-  final VoidCallback toggleSwitch;
-
-  _ViewModel({this.cardLockStatus, this.toggleSwitch});
-
-  static _ViewModel fromStore(Store<AppState> store) {
-    return new _ViewModel(
-      cardLockStatus: store.state.cardLockStatus,
-      toggleSwitch: () { store.dispatch(new ToggleBuoyCardLockAction()); },
     );
   }
 }
