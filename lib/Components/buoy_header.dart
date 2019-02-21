@@ -12,7 +12,7 @@ class _BuoyHeaderState extends State<BuoyHeader> {
 
   @override
   Widget build(BuildContext context) {
-    double spinnerValue = widget.redeemed == 0.0 ? 1.0 :  (widget.points - widget.redeemed) / widget.points;
+    double spinnerValue = widget.redeemed == 0.0 ? 1.0 : (widget.points - widget.redeemed) / widget.points;
 
     return Stack(
       alignment: Alignment(0.0, 0.0),

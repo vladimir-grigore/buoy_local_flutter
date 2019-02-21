@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:buoy/Components/buoy_local_card.dart';
+
 class EarnPage extends StatefulWidget {
   EarnPage({ Key key }) : super(key: key);
 
@@ -101,44 +103,7 @@ class _EarnPageState extends State<EarnPage> {
                 color: Colors.black12,
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
               ),
-              Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: (){ print("Buoy card clicked"); },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 15.0),
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Opacity(
-                        opacity: status ? 1.0 : 0.5,
-                        child: Image.asset(
-                          'images/buoy-local-card-v2.png', 
-                          fit: BoxFit.fitWidth, 
-                          height: MediaQuery.of(context).size.height / 7,
-                          ),
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Switch(
-                        value: status,
-                        onChanged: (bool newValue){ 
-                          setState(() {
-                            status = newValue;
-                          });
-                          print("Switch is $status"); 
-                        },
-                      ),
-                      Container(
-                        width: 80,
-                        margin: EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Text(status ? "Unlocked" : "Locked"),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              BuoyLocalCardAndSwitch(),
             ],
           ),
         ],
