@@ -35,6 +35,33 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: 0,
+            type:BottomNavigationBarType.fixed,
+            fixedColor: Colors.indigo,
+            items: [
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.home, color: Colors.grey),
+                title: new Text("Home", style: TextStyle(color: Colors.grey)),
+              ),
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.location_on, color: Colors.grey),
+                title: new Text("Locations", style: TextStyle(color: Colors.grey)),
+              ),
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.history, color: Colors.grey),
+                title: new Text("History", style: TextStyle(color: Colors.grey)),
+              ),
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.credit_card, color: Colors.grey),
+                title: new Text("Card", style: TextStyle(color: Colors.grey)),
+              ),
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.more_horiz, color: Colors.grey),
+                title: new Text("More", style: TextStyle(color: Colors.grey)),
+              ),
+            ],
+          ),
         );
       },
     );
