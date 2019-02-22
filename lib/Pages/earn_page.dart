@@ -22,7 +22,7 @@ class EarnPage extends StatelessWidget {
                   child: Image.asset(
                     'images/eat-icon-text.png', 
                     fit: BoxFit.scaleDown, 
-                    height: MediaQuery.of(context).size.height / 8,
+                    height: MediaQuery.of(context).size.height / 9,
                   ),
                 ),
               ),
@@ -34,7 +34,7 @@ class EarnPage extends StatelessWidget {
                   child: Image.asset(
                     'images/shop-icon-text.png', 
                     fit: BoxFit.scaleDown, 
-                    height: MediaQuery.of(context).size.height / 8,
+                    height: MediaQuery.of(context).size.height / 9,
                   ),
                 ),
               ),
@@ -46,7 +46,7 @@ class EarnPage extends StatelessWidget {
                   child: Image.asset(
                     'images/play-icon-text.png', 
                     fit: BoxFit.scaleDown, 
-                    height: MediaQuery.of(context).size.height / 8,
+                    height: MediaQuery.of(context).size.height / 9,
                   ),
                 ),
               ),
@@ -61,12 +61,13 @@ class EarnPage extends StatelessWidget {
                 'images/find-deals-button.png', 
                 fit: BoxFit.scaleDown,
                 height: MediaQuery.of(context).size.height / 10,
+                alignment: Alignment.center,
               ),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               BuoyBucks(),
               Container( //Vertical divider

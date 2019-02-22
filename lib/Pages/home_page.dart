@@ -6,6 +6,8 @@ import 'package:buoy/Components/buoy_header.dart';
 import 'package:buoy/model/AppState.dart';
 import 'package:buoy/Components/view_model.dart';
 
+import 'package:buoy/Pages/placeholder_page.dart';
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -15,6 +17,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          BuoyHeader(),
+          TabContainer(),
+        ],
+      ),
+    ),
+    PlaceholderPage(Colors.deepOrange, "Locations page"),
+    PlaceholderPage(Colors.deepPurple, "History page"),
+    PlaceholderPage(Colors.green, "Card page"),
+    PlaceholderPage(Colors.lightBlue, "More page"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,44 +44,42 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: Colors.indigo.shade700,
             title: Text(widget.title),
           ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                BuoyHeader(),
-                TabContainer(),
-              ],
-            ),
-          ),
+          body: _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: 0,
-            type:BottomNavigationBarType.fixed,
-            fixedColor: Colors.indigo,
+            currentIndex: _currentIndex,
+            onTap: onTabTapped,
+            type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                icon: new Icon(Icons.home, color: Colors.grey),
-                title: new Text("Home", style: TextStyle(color: Colors.grey)),
+                icon: new Icon(Icons.home),
+                title: new Text("Home"),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.location_on, color: Colors.grey),
-                title: new Text("Locations", style: TextStyle(color: Colors.grey)),
+                icon: new Icon(Icons.location_on),
+                title: new Text("Locations"),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.history, color: Colors.grey),
-                title: new Text("History", style: TextStyle(color: Colors.grey)),
+                icon: new Icon(Icons.history),
+                title: new Text("History"),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.credit_card, color: Colors.grey),
-                title: new Text("Card", style: TextStyle(color: Colors.grey)),
+                icon: new Icon(Icons.credit_card),
+                title: new Text("Card"),
               ),
               BottomNavigationBarItem(
-                icon: new Icon(Icons.more_horiz, color: Colors.grey),
-                title: new Text("More", style: TextStyle(color: Colors.grey)),
+                icon: new Icon(Icons.more_horiz),
+                title: new Text("More"),
               ),
             ],
           ),
         );
       },
     );
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }

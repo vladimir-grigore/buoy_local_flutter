@@ -30,7 +30,7 @@ class BuoyHeader extends StatelessWidget {
                 children: <Widget>[
                   Text("MY POINTS", 
                     style: TextStyle(
-                      color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800, letterSpacing: -0.5
+                      color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400, letterSpacing: -0.5
                     )
                   ),
                   Text("${(vm.points - vm.redeemed).toInt()}", style: TextStyle(color: Colors.white, fontSize: 20)),

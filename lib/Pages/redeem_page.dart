@@ -21,7 +21,7 @@ class RedeemPage extends StatelessWidget {
                   GestureDetector(
                     onTap: (){ print("Buoy Bucks clicked"); },
                     child: Container(
-                      margin: EdgeInsets.all(20.0),
+                      margin: EdgeInsets.all(10.0),
                       width: MediaQuery.of(context).size.width / 2,
                       child: Image.asset('images/buoy-bucks-container.png', fit: BoxFit.fitWidth),
                     ),
@@ -62,15 +62,15 @@ class RedeemPage extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 20),
+                padding: EdgeInsets.only(top: 10),
                 child: RaisedButton(
-                  onPressed: vm.redeemed > 0 ? (){
+                  onPressed: vm.redeemed > 0 ? () {
                     vm.redeemPoints(vm.redeemed);
                   } : null,
                   color: Theme.of(context).accentColor,
                   textColor: Colors.white,
                   disabledTextColor: Colors.white,
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   child: Text("REDEEM POINTS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300)),
                 ),
               ),

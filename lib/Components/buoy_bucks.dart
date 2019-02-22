@@ -23,7 +23,7 @@ class BuoyBucks extends StatelessWidget {
                 child: Image.asset(
                   'images/buoy-bucks-container.png', 
                   fit: BoxFit.fitWidth, 
-                  height: MediaQuery.of(context).size.height / 6,
+                  height: MediaQuery.of(context).size.height / 5.5,
                   ),
               ),
             ),

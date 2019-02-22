@@ -24,7 +24,7 @@ class BuoyLocalCardAndSwitch extends StatelessWidget {
                   child: Image.asset(
                     'images/buoy-local-card-v2.png', 
                     fit: BoxFit.fitWidth, 
-                    height: MediaQuery.of(context).size.height / 7,
+                    height: MediaQuery.of(context).size.height / 8,
                     ),
                 ),
               ),
