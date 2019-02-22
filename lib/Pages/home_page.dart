@@ -15,8 +15,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double points = 12341.0;
-  double redeemed = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +30,8 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                BuoyHeader(points: vm.points, redeemed: vm.redeemed),
-                TabContainer(
-                  points: vm.points,
-                  onPointsRedeem: (newValue) {
-                    vm.modifySlider(newValue);
-                  },
-                ),
+                BuoyHeader(),
+                TabContainer(),
               ],
             ),
           ),

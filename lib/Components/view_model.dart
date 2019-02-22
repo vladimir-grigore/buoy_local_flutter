@@ -11,6 +11,7 @@ class ViewModel {
   final bool cardLockStatus;
   final VoidCallback toggleSwitch;
   final Function(double) modifySlider;
+  final Function(double) redeemPoints;
 
   ViewModel({
     this.points, 
@@ -19,6 +20,7 @@ class ViewModel {
     this.modifySlider,
     this.cardLockStatus,
     this.toggleSwitch,
+    this.redeemPoints,
   });
 
   static ViewModel fromStore(Store<AppState> store) {
@@ -29,6 +31,7 @@ class ViewModel {
       cardLockStatus: store.state.cardLockStatus,
       toggleSwitch: () { store.dispatch(new ToggleBuoyCardLockAction()); },
       modifySlider: (newValue) {store.dispatch(new PointsSliderAction(newValue));},
+      redeemPoints: (redeemed) {store.dispatch(new RedeemPointsAction(redeemed));},
     );
   }
 }

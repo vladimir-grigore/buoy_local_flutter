@@ -29,7 +29,9 @@ class BuoyBucks extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 35),
-              child: Text("\$${vm.buoyBucks.toString()}", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600)),
+              child: Text("\$${vm.buoyBucks.toStringAsFixed(2)}", 
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600)
+              ),
             ),
           ],
         );

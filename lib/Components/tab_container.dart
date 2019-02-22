@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:buoy/Pages/redeem_page.dart';
 import 'package:buoy/Pages/earn_page.dart';
 
-class TabContainer extends StatefulWidget {
-  final double points;
-  final RedeemCallback onPointsRedeem;
-  TabContainer({ Key key, this.points, this.onPointsRedeem }) : super(key: key);
-
-  @override
-  _TabContainer createState() => _TabContainer();
-}
-
-class _TabContainer extends State<TabContainer> {
+class TabContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
@@ -32,7 +24,7 @@ class _TabContainer extends State<TabContainer> {
             body: TabBarView(
               children: <Widget>[
                 EarnPage(),
-                RedeemPage(points: widget.points, onPointsRedeem: widget.onPointsRedeem),
+                RedeemPage(),
               ],
             ),
           ),
