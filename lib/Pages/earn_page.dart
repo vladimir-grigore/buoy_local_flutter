@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:buoy/Components/buoy_local_card.dart';
 import 'package:buoy/Components/buoy_bucks.dart';
+import 'package:buoy/model/AppState.dart';
+import 'package:buoy/api/fetch_api_data.dart';
 
 class EarnPage extends StatelessWidget {
 
@@ -52,18 +55,26 @@ class EarnPage extends StatelessWidget {
               ),
             ],
           ),
-          GestureDetector(
-            onTap: (){ print("Find deals button pressed"); },
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 10.0),
-              width: MediaQuery.of(context).size.width,
-              child: Image.asset(
-                'images/find-deals-button.png', 
-                fit: BoxFit.scaleDown,
-                height: MediaQuery.of(context).size.height / 10,
-                alignment: Alignment.center,
-              ),
-            ),
+          StoreConnector<AppState, FetchProgramMembership>(
+            converter: (store) => () => store.dispatch(fetchApiData),
+            builder: (_, fetchApiDataCallback) {
+              return new GestureDetector(
+                onTap: (){ 
+                  print("Find Deals button pressed");
+                  fetchApiDataCallback();
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10.0),
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    'images/find-deals-button.png', 
+                    fit: BoxFit.scaleDown,
+                    height: MediaQuery.of(context).size.height / 10,
+                    alignment: Alignment.center,
+                  ),
+                ),
+              );
+            },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -84,3 +95,5 @@ class EarnPage extends StatelessWidget {
     );
   }
 }
+
+typedef void FetchProgramMembership();

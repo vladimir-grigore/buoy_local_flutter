@@ -8,6 +8,8 @@ AppState appReducer(AppState state, action) {
     return toggleCardLock(state);
   } else if (action is PointsSliderAction) {
     return modifySlider(state, action);
+  } else if (action is UpdateProgramMembershipAction) {
+    return updateProgramMembershipData(state, action);
   } else {
     return state;
   }
@@ -28,4 +30,8 @@ AppState toggleCardLock(AppState state) {
 
 AppState modifySlider(AppState state, PointsSliderAction action) {
   return state.copyWith(redeemed: action.newValue);
+}
+
+AppState updateProgramMembershipData(AppState state, UpdateProgramMembershipAction action){
+  return state.copyWith(programMembership: action.result);
 }
