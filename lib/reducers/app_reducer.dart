@@ -16,7 +16,7 @@ AppState appReducer(AppState state, action) {
 }
 
 AppState redeemPoints(AppState state, RedeemPointsAction action) {
-  return new AppState(
+  return state.copyWith(
     points: state.points - action.redeemed,
     redeemed: 0.0,
     buoyBucks: state.buoyBucks + (action.redeemed / 100),
@@ -33,5 +33,10 @@ AppState modifySlider(AppState state, PointsSliderAction action) {
 }
 
 AppState updateProgramMembershipData(AppState state, UpdateProgramMembershipAction action){
-  return state.copyWith(programMembership: action.result);
+  return state.copyWith(
+    points: action.result['data'][0]['attributes']['points'].toDouble(),
+    buoyBucks: action.result['data'][0]['attributes']['available-credit']['cents'].toDouble(),
+    cardLockStatus: action.result['included'][0]['attributes']['locked'],
+    programMembership: action.result
+  );
 }

@@ -3,17 +3,17 @@ class AppState {
   final double redeemed;
   final double buoyBucks;
   final bool cardLockStatus;
-  final List<dynamic> programMembership;
+  final Map<String, dynamic> programMembership;
 
   AppState({ 
     this.points = 1234.0,
     this.redeemed = 0.0,
     this.buoyBucks = 12.51,
-    this.cardLockStatus = true,
+    this.cardLockStatus = false,
     this.programMembership,
   });
 
-  AppState copyWith({double points, double redeemed, double buoyBucks, bool cardLockStatus, List<dynamic> programMembership}) {
+  AppState copyWith({double points, double redeemed, double buoyBucks, bool cardLockStatus, Map<String, dynamic> programMembership}) {
     return new AppState(
       points: points ?? this.points,
       redeemed: redeemed ?? this.redeemed,

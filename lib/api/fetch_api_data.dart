@@ -15,7 +15,7 @@ ThunkAction<AppState> fetchApiData = (Store<AppState> store) async {
     },
   );
 
-  List<dynamic> result = json.decode(response.body)['data'];
+  Map<String, dynamic> result = json.decode(response.body);
 
   store.dispatch(new UpdateProgramMembershipAction(result));
 };

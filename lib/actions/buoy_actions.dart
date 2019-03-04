@@ -13,7 +13,7 @@ class PointsSliderAction {
 }
 
 class UpdateProgramMembershipAction {
-  final List<dynamic> result;
+  final Map<String, dynamic> result;
 
   UpdateProgramMembershipAction(this.result);
 }

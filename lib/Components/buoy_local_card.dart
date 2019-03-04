@@ -20,7 +20,7 @@ class BuoyLocalCardAndSwitch extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 15.0),
                 width: MediaQuery.of(context).size.width / 3,
                 child: Opacity(
-                  opacity: vm.cardLockStatus ? 1.0 : 0.5,
+                  opacity: vm.cardLockStatus ? 0.5 : 1.0,
                   child: Image.asset(
                     'images/buoy-local-card-v2.png', 
                     fit: BoxFit.fitWidth, 
@@ -33,7 +33,7 @@ class BuoyLocalCardAndSwitch extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Switch(
-                  value: vm.cardLockStatus,
+                  value: !vm.cardLockStatus,
                   onChanged: (bool newValue){ 
                     vm.toggleSwitch();
                   },
@@ -41,7 +41,7 @@ class BuoyLocalCardAndSwitch extends StatelessWidget {
                 Container(
                   width: 80,
                   margin: EdgeInsets.symmetric(horizontal: 15.0),
-                  child: Text(vm.cardLockStatus ? "Unlocked" : "Locked"),
+                  child: Text(vm.cardLockStatus ? "Locked" : "Unlocked"),
                 ),
               ],
             ),
