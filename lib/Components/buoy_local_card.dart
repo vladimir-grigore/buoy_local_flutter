@@ -9,13 +9,41 @@ class BuoyLocalCardAndSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector<AppState, ViewModel>(
+    return StoreConnector<AppState, ViewModel>(
       converter: ViewModel.fromStore,
       builder: (BuildContext context, ViewModel vm) {
         return Column(
           children: <Widget>[
             GestureDetector(
-              onTap: (){ print("Buoy card clicked"); },
+              onTap: (){ 
+                showDialog(
+                  context: context,
+                  builder: (_) => SimpleDialog(
+                    title: Text("Your Buoy Local Card"),
+                    titlePadding: EdgeInsets.all(20),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                    children: <Widget>[
+                      Text(
+                        "For added security purposes you may lock your buoy Local card any time. \n",
+                        style: TextStyle(color: Colors.black45),
+                      ),
+                      Text(
+                        "Buoy Local Card is issued by MetaBank®, Member FDIC.\n",
+                        style: TextStyle(color: Colors.black45),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          FlatButton(
+                            onPressed: (){Navigator.of(context).pop();},
+                            child: Text("GOT IT", style: TextStyle(color: Colors.indigo[700])),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 15.0),
                 width: MediaQuery.of(context).size.width / 3,

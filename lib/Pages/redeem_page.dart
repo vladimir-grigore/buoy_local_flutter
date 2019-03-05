@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:buoy/model/AppState.dart';
 import 'package:buoy/Components/view_model.dart';
+import 'package:buoy/Components/learn_more_modal.dart';
 
 class RedeemPage extends StatelessWidget {
 
@@ -74,6 +75,7 @@ class RedeemPage extends StatelessWidget {
                   child: Text("REDEEM POINTS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300)),
                 ),
               ),
+              LearnMoreModal(),
             ],
           ),
         );
