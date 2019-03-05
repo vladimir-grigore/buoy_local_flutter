@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:buoy/model/AppState.dart';
 import 'package:buoy/Components/view_model.dart';
 import 'package:buoy/Components/learn_more_modal.dart';
+import 'package:buoy/Components/redeem_points_modal.dart';
 
 class RedeemPage extends StatelessWidget {
 
@@ -62,19 +63,7 @@ class RedeemPage extends StatelessWidget {
                   },
                 ),
               ),
-              Container(
-                padding: EdgeInsets.only(top: 10),
-                child: RaisedButton(
-                  onPressed: vm.redeemed > 0 ? () {
-                    vm.redeemPoints(vm.redeemed);
-                  } : null,
-                  color: Theme.of(context).accentColor,
-                  textColor: Colors.white,
-                  disabledTextColor: Colors.white,
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                  child: Text("REDEEM POINTS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300)),
-                ),
-              ),
+              RedeemPointsModal(),
               LearnMoreModal(),
             ],
           ),
