@@ -7,6 +7,7 @@ import 'package:buoy/model/AppState.dart';
 import 'package:buoy/Components/view_model.dart';
 
 import 'package:buoy/Pages/placeholder_page.dart';
+import 'package:buoy/Pages/transactions_page.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -30,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ),
     PlaceholderPage(Colors.deepOrange, "Locations page"),
-    PlaceholderPage(Colors.deepPurple, "History page"),
+    TransactionsPage(Colors.deepPurple),
     PlaceholderPage(Colors.green, "Card page"),
     PlaceholderPage(Colors.lightBlue, "More page"),
   ];

@@ -10,6 +10,8 @@ AppState appReducer(AppState state, action) {
     return modifySlider(state, action);
   } else if (action is UpdateProgramMembershipAction) {
     return updateProgramMembershipData(state, action);
+  } else if (action is UpdateTransactionsAction) {
+    return updateTransactionsData(state, action);
   } else {
     return state;
   }
@@ -39,4 +41,8 @@ AppState updateProgramMembershipData(AppState state, UpdateProgramMembershipActi
     cardLockStatus: action.result['included'][0]['attributes']['locked'],
     programMembership: action.result
   );
+}
+
+AppState updateTransactionsData(AppState state, UpdateTransactionsAction action){
+  return state.copyWith(transactions: action.result['data']);
 }

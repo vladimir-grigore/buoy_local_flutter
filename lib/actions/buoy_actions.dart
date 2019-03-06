@@ -17,3 +17,9 @@ class UpdateProgramMembershipAction {
 
   UpdateProgramMembershipAction(this.result);
 }
+
+class UpdateTransactionsAction {
+  final Map<String, dynamic> result;
+
+  UpdateTransactionsAction(this.result);
+}

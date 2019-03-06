@@ -4,6 +4,7 @@ class AppState {
   final double buoyBucks;
   final bool cardLockStatus;
   final Map<String, dynamic> programMembership;
+  final List transactions;
 
   AppState({ 
     this.points = 1234.0,
@@ -11,20 +12,22 @@ class AppState {
     this.buoyBucks = 12.51,
     this.cardLockStatus = false,
     this.programMembership,
+    this.transactions,
   });
 
-  AppState copyWith({double points, double redeemed, double buoyBucks, bool cardLockStatus, Map<String, dynamic> programMembership}) {
+  AppState copyWith({double points, double redeemed, double buoyBucks, bool cardLockStatus, Map<String, dynamic> programMembership, List transactions}) {
     return new AppState(
       points: points ?? this.points,
       redeemed: redeemed ?? this.redeemed,
       buoyBucks: buoyBucks ?? this.buoyBucks,
       cardLockStatus: cardLockStatus ?? this.cardLockStatus,
       programMembership: programMembership ?? this.programMembership,
+      transactions: transactions ?? this.transactions,
     );
   }
 
   @override
   String toString() {
-    return "points: $points redeemed: $redeemed, buoyBucks: $buoyBucks, cardLockStatus: $cardLockStatus, programMembership: $programMembership";
+    return "points: $points redeemed: $redeemed, buoyBucks: $buoyBucks, cardLockStatus: $cardLockStatus, programMembership: $programMembership, transactions: $transactions";
   }
 }

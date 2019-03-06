@@ -4,7 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:buoy/Components/buoy_local_card.dart';
 import 'package:buoy/Components/buoy_bucks.dart';
 import 'package:buoy/model/AppState.dart';
-import 'package:buoy/api/fetch_api_data.dart';
+import 'package:buoy/api/get_program_membership.dart';
 
 class EarnPage extends StatelessWidget {
 
@@ -56,7 +56,7 @@ class EarnPage extends StatelessWidget {
             ],
           ),
           StoreConnector<AppState, FetchProgramMembership>(
-            converter: (store) => () => store.dispatch(fetchApiData),
+            converter: (store) => () => store.dispatch(getProgramMembership),
             builder: (_, fetchApiDataCallback) {
               return new GestureDetector(
                 onTap: (){ 
