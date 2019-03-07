@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'AppState.g.dart';
+
+@JsonSerializable()
 class AppState {
   final double points;
   final double redeemed;
@@ -25,6 +30,9 @@ class AppState {
       transactions: transactions ?? this.transactions,
     );
   }
+
+  factory AppState.fromJson(Map<String, dynamic> json) => _$AppStateFromJson(json);
+  Map<String, dynamic> toJson() => _$AppStateToJson(this);
 
   @override
   String toString() {
