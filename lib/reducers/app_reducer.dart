@@ -4,6 +4,8 @@ import 'package:buoy/actions/buoy_actions.dart';
 AppState appReducer(AppState state, action) {
   if (action is RedeemPointsAction){
     return redeemPoints(state, action);
+  } else if (action is ToggleLoadingScreenAction) {
+    return toggleLoadingScreen(state);
   } else if (action is ToggleBuoyCardLockAction) {
     return toggleCardLock(state);
   } else if (action is PointsSliderAction) {
@@ -28,6 +30,10 @@ AppState redeemPoints(AppState state, RedeemPointsAction action) {
 
 AppState toggleCardLock(AppState state) {
   return state.copyWith(cardLockStatus: !state.cardLockStatus);
+}
+
+AppState toggleLoadingScreen(AppState state) {
+  return state.copyWith(isLoading: !state.isLoading);
 }
 
 AppState modifySlider(AppState state, PointsSliderAction action) {

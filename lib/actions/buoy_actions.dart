@@ -6,6 +6,8 @@ class RedeemPointsAction {
 
 class ToggleBuoyCardLockAction {}
 
+class ToggleLoadingScreenAction {}
+
 class PointsSliderAction {
   final double newValue;
 

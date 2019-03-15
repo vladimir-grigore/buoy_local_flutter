@@ -1,12 +1,12 @@
-import 'package:redux_thunk/redux_thunk.dart';
-import 'package:redux/redux.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:buoy/model/AppState.dart';
 import 'package:buoy/actions/buoy_actions.dart';
+import 'package:buoy/model/Store.dart';
 
-ThunkAction<AppState> getTransactions = (Store<AppState> store) async {
+Future<Map> getTransactions(BuildContext context) async {
+
   http.Response response = await http.get(
     'http://api.paywith.127.0.0.1.nip.io:3200/v2/transactions?program_id=8700',
     headers: {
@@ -16,6 +16,7 @@ ThunkAction<AppState> getTransactions = (Store<AppState> store) async {
   );
 
   Map<String, dynamic> result = json.decode(response.body);
-
   store.dispatch(new UpdateTransactionsAction(result));
-};
+
+  return result;
+}

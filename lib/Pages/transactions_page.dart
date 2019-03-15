@@ -1,37 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 
-import 'package:buoy/model/AppState.dart';
 import 'package:buoy/api/get_transactions.dart';
 
-class TransactionsPage extends StatelessWidget {
-  final Color color;
+class TransactionsPage extends StatefulWidget {
+  TransactionsPage({Key key}) : super(key: key);
 
-  TransactionsPage(this.color);
+  @override
+  _TransactionsPage createState() => _TransactionsPage();
+}
+
+class _TransactionsPage extends State<TransactionsPage> {
+
+  _TransactionsPage();
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      color: color,
-      child: new Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("Transactions page"),
-            StoreConnector<AppState, GetTransactions>(
-              converter: (store) => () => store.dispatch(getTransactions),
-              builder: (_, getTransactionsCallback) {
-                return RaisedButton(
-                  onPressed: () {getTransactionsCallback();},
-                  child: Text("Get Transactions"),
-                );
-              }
-            ),
-          ],
-        ),
-      ),
+    return new FutureBuilder(
+      future: getTransactions(context),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if(snapshot.hasData) {
+          if(snapshot.data != null) {
+            var transactions  = snapshot.data['data'];
+
+            return new Container(
+              child: ListView.builder (
+                itemCount: transactions.length,
+                padding: EdgeInsets.all(8.0),
+                itemBuilder: (BuildContext context, int index) {
+                  if(transactions != null) {
+                    return Card(
+                      child:Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text("${transactions[index]['attributes']['merchant-name']}"),
+                      ),
+                    );
+                  }
+                },
+              ),
+            );
+          }
+        } else {
+          return new Center(
+            child: new CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }
-
-typedef void GetTransactions();

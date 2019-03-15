@@ -7,6 +7,8 @@ import 'package:buoy/model/AppState.dart';
 import 'package:buoy/actions/buoy_actions.dart';
 
 ThunkAction<AppState> getProgramMembership = (Store<AppState> store) async {
+  store.dispatch(new ToggleLoadingScreenAction());
+
   http.Response response = await http.get(
     'http://api.paywith.127.0.0.1.nip.io:3200/v2/program-memberships?program_id=8700&include=active_card,program,active_funding_source',
     headers: {
@@ -18,4 +20,5 @@ ThunkAction<AppState> getProgramMembership = (Store<AppState> store) async {
   Map<String, dynamic> result = json.decode(response.body);
 
   store.dispatch(new UpdateProgramMembershipAction(result));
+  store.dispatch(new ToggleLoadingScreenAction());
 };

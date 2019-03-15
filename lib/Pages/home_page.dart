@@ -20,6 +20,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   
+  Widget get _loadingView {
+    return new Center(
+      child: new CircularProgressIndicator(),
+    );
+  }
+
   final List<Widget> _children = [
     Center(
       child: Column(
@@ -31,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ),
     PlaceholderPage(Colors.deepOrange, "Locations page"),
-    TransactionsPage(Colors.deepPurple),
+    TransactionsPage(),
     PlaceholderPage(Colors.green, "Card page"),
     PlaceholderPage(Colors.lightBlue, "More page"),
   ];
@@ -46,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: Colors.indigo.shade700,
             title: Text(widget.title),
           ),
-          body: _children[_currentIndex],
+          body: vm.isLoading ?  _loadingView : _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _currentIndex,
             onTap: onTabTapped,
