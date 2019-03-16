@@ -32,6 +32,7 @@ dev_dependencies:
   redux_remote_devtools: ^0.0.4  # Start the debugger with "remotedev --port 8000"
   build_runner: ^1.0.0
   json_serializable: ^2.0.2
+  intl: ^0.15.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

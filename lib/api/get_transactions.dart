@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:buoy/actions/buoy_actions.dart';
 import 'package:buoy/model/Store.dart';
 
-Future<Map> getTransactions(BuildContext context) async {
+Future<Map> getTransactions() async {
 
   http.Response response = await http.get(
     'http://api.paywith.127.0.0.1.nip.io:3200/v2/transactions?program_id=8700',

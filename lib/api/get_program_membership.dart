@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:buoy/model/AppState.dart';
 import 'package:buoy/actions/buoy_actions.dart';
 
+//ThunkAction is a flutter middleware
 ThunkAction<AppState> getProgramMembership = (Store<AppState> store) async {
   store.dispatch(new ToggleLoadingScreenAction());
 
