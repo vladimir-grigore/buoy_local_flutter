@@ -2,7 +2,9 @@ import 'package:buoy/model/AppState.dart';
 import 'package:buoy/actions/buoy_actions.dart';
 
 AppState appReducer(AppState state, action) {
-  if (action is RedeemPointsAction){
+  if (action is UpdateTabIndexAction) {
+    return updateTabIndexAction(state, action);
+  } else if (action is RedeemPointsAction){
     return redeemPoints(state, action);
   } else if (action is ToggleLoadingScreenAction) {
     return toggleLoadingScreen(state);
@@ -17,6 +19,9 @@ AppState appReducer(AppState state, action) {
   } else {
     return state;
   }
+}
+AppState updateTabIndexAction(AppState state, UpdateTabIndexAction action) {
+  return state.copyWith(tabIndex: action.newIndex);
 }
 
 AppState redeemPoints(AppState state, RedeemPointsAction action) {

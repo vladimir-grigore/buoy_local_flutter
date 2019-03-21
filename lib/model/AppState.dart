@@ -4,6 +4,7 @@ part 'AppState.g.dart';
 
 @JsonSerializable()
 class AppState {
+  final int tabIndex;
   final bool isLoading;
   final double points;
   final double redeemed;
@@ -13,6 +14,7 @@ class AppState {
   final List transactions;
 
   AppState({
+    this.tabIndex = 0,
     this.isLoading = false,
     this.points = 1234.0,
     this.redeemed = 0.0,
@@ -22,8 +24,9 @@ class AppState {
     this.transactions,
   });
 
-  AppState copyWith({bool isLoading, double points, double redeemed, double buoyBucks, bool cardLockStatus, Map<String, dynamic> programMembership, List transactions}) {
+  AppState copyWith({int tabIndex, bool isLoading, double points, double redeemed, double buoyBucks, bool cardLockStatus, Map<String, dynamic> programMembership, List transactions}) {
     return new AppState(
+      tabIndex: tabIndex ?? this.tabIndex,
       isLoading: isLoading ?? this.isLoading,
       points: points ?? this.points,
       redeemed: redeemed ?? this.redeemed,
@@ -40,6 +43,6 @@ class AppState {
 
   @override
   String toString() {
-    return "points: $points redeemed: $redeemed, buoyBucks: $buoyBucks, cardLockStatus: $cardLockStatus";
+    return "tabIndex: $tabIndex, points: $points redeemed: $redeemed, buoyBucks: $buoyBucks, cardLockStatus: $cardLockStatus";
   }
 }

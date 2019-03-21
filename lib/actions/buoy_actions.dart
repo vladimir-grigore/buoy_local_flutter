@@ -25,3 +25,9 @@ class UpdateTransactionsAction {
 
   UpdateTransactionsAction(this.result);
 }
+
+class UpdateTabIndexAction {
+  final int newIndex;
+
+  UpdateTabIndexAction(this.newIndex);
+}

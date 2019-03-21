@@ -16,30 +16,35 @@ class _TransactionsPage extends State<TransactionsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new FutureBuilder(
-      future: getTransactions(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if(snapshot.hasData) {    
-          if(snapshot.data != null) {
-            var transactions  = snapshot.data['data'];
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Transactions"),
+      ),
+      body: FutureBuilder(
+        future: getTransactions(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData) {    
+            if(snapshot.data != null) {
+              var transactions  = snapshot.data['data'];
 
-            return new Container(
-              child: ListView.builder (
-                itemCount: transactions.length,
-                itemBuilder: (BuildContext context, int index) {
-                  if(transactions != null) {
-                    return TransactionListItem(transactions:transactions, index: index);
-                  }
-                },
-              ),
+              return Container(
+                child: ListView.builder (
+                  itemCount: transactions.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if(transactions != null) {
+                      return TransactionListItem(transactions:transactions, index: index);
+                    }
+                  },
+                ),
+              );
+            }
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
             );
           }
-        } else {
-          return new Center(
-            child: new CircularProgressIndicator(),
-          );
-        }
-      },
+        },
+      ),
     );
   }
 }
