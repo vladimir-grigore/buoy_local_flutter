@@ -29,7 +29,7 @@ class _TransactionsPage extends State<TransactionsPage> {
         builder: (BuildContext context, ViewModel vm) {
           var transactions = vm.transactions;
 
-          if(transactions != null){
+          if(transactions != null) {
             return Container(
               child: ListView.builder (
                 itemCount: transactions.length,
