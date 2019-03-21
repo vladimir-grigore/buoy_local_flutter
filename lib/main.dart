@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:buoy/Pages/home_page.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 import 'package:buoy/model/AppState.dart';
 import 'package:buoy/model/Store.dart';
-
-import 'package:buoy/app.dart';
 
 void main() async {
   // Remote dev tools is used for Redux debugging in the browser
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.indigo,
         ),
-        home: AppWidget(),
+        home: MyHomePage(title: 'Home'),
       ),
     );
   }

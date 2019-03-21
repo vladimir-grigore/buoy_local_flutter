@@ -5,7 +5,6 @@ import 'package:buoy/model/AppState.dart';
 import 'package:buoy/actions/buoy_actions.dart';
 
 class ViewModel {
-  final int tabIndex;
   final bool isLoading;
   final double points;
   final double redeemed;
@@ -20,7 +19,6 @@ class ViewModel {
   final List transactions;
 
   ViewModel({
-    this.tabIndex,
     this.isLoading,
     this.points, 
     this.redeemed,
@@ -37,7 +35,6 @@ class ViewModel {
 
   static ViewModel fromStore(Store<AppState> store) {
     return new ViewModel(
-      tabIndex:store.state.tabIndex,
       isLoading: store.state.isLoading,
       points: store.state.points,
       redeemed: store.state.redeemed,
