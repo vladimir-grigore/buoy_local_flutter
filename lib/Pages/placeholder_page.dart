@@ -10,6 +10,7 @@ class PlaceholderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.indigo.shade700,
         title: Text(pageName),
       ),
       body: Container(

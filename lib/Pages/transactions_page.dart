@@ -22,6 +22,7 @@ class _TransactionsPage extends State<TransactionsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.indigo.shade700,
         title: Text("Transactions"),
       ),
       body: StoreConnector<AppState, ViewModel>(
@@ -111,7 +112,7 @@ class TransactionListItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => TransactionDetails()),
+            MaterialPageRoute(builder: (context) => TransactionDetails(index)),
           );
         },
         child: Padding(
