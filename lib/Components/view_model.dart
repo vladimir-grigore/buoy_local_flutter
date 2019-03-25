@@ -18,6 +18,7 @@ class ViewModel {
   final Function(dynamic) updateTransactions;
   final Map<String, dynamic> programMemnership;
   final List transactions;
+  final Map<String, dynamic> activeTransaction;
 
   ViewModel({
     this.tabIndex,
@@ -33,6 +34,7 @@ class ViewModel {
     this.updateTransactions,
     this.programMemnership,
     this.transactions,
+    this.activeTransaction,
   });
 
   static ViewModel fromStore(Store<AppState> store) {
@@ -45,6 +47,7 @@ class ViewModel {
       cardLockStatus: store.state.cardLockStatus,
       programMemnership: store.state.programMembership,
       transactions: store.state.transactions,
+      activeTransaction: store.state.activeTransaction,
       toggleLoadingScreen: () { store.dispatch(new ToggleLoadingScreenAction()); },
       toggleSwitch: () { store.dispatch(new ToggleBuoyCardLockAction()); },
       modifySlider: (newValue) { store.dispatch(new PointsSliderAction(newValue)); },

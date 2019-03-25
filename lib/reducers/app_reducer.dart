@@ -16,6 +16,8 @@ AppState appReducer(AppState state, action) {
     return updateProgramMembershipData(state, action);
   } else if (action is UpdateTransactionsAction) {
     return updateTransactionsData(state, action);
+  } else if (action is UpdateActiveTransactionAction) {
+    return updateActiveTransactionData(state, action);
   } else {
     return state;
   }
@@ -56,4 +58,8 @@ AppState updateProgramMembershipData(AppState state, UpdateProgramMembershipActi
 
 AppState updateTransactionsData(AppState state, UpdateTransactionsAction action){
   return state.copyWith(transactions: action.result['data']);
+}
+
+AppState updateActiveTransactionData(AppState state, UpdateActiveTransactionAction action){
+  return state.copyWith(activeTransaction: action.result);
 }

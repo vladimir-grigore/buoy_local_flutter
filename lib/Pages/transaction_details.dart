@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:buoy/Components/view_model.dart';
 import 'package:buoy/model/AppState.dart';
+import 'package:buoy/api/get_active_transaction.dart';
 
 class TransactionDetails extends StatelessWidget {
   final index;
@@ -18,12 +19,39 @@ class TransactionDetails extends StatelessWidget {
       body: StoreConnector<AppState, ViewModel>(
         converter: ViewModel.fromStore,
         builder: (BuildContext context, ViewModel vm) {
-          return  Container(
-            color: Colors.cyan,
-            child: Center(
-              child: Text("${vm.transactions[index]}"),
-            ),
+          return FutureBuilder(
+            future: getActiveTransaction(vm.transactions[index]['id']),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if(snapshot.hasData) {
+                if(snapshot.data != null) {
+                  return  Container(
+                    color: Colors.cyan,
+                    child: Column(
+                      children: <Widget>[
+                        Text("Transaction", 
+                          style: TextStyle(fontSize: 30),
+                        ),
+                        Center(
+                          child: Text("${vm.transactions[index]}"),
+                        ),
+                        Text("Active Transaction", 
+                          style: TextStyle(fontSize: 30),
+                        ),
+                        Center(
+                          child: Text("${vm.activeTransaction}"),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
           );
+
         },
       ),
     );

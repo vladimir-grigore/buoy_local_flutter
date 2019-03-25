@@ -26,6 +26,12 @@ class UpdateTransactionsAction {
   UpdateTransactionsAction(this.result);
 }
 
+class UpdateActiveTransactionAction {
+  final Map<String, dynamic> result;
+
+  UpdateActiveTransactionAction(this.result);
+}
+
 class UpdateTabIndexAction {
   final int newIndex;
 

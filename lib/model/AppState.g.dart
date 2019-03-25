@@ -15,7 +15,8 @@ AppState _$AppStateFromJson(Map<String, dynamic> json) {
       buoyBucks: (json['buoyBucks'] as num)?.toDouble(),
       cardLockStatus: json['cardLockStatus'] as bool,
       programMembership: json['programMembership'] as Map<String, dynamic>,
-      transactions: json['transactions'] as List);
+      transactions: json['transactions'] as List,
+      activeTransaction: json['activeTransaction'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$AppStateToJson(AppState instance) => <String, dynamic>{
@@ -26,5 +27,6 @@ Map<String, dynamic> _$AppStateToJson(AppState instance) => <String, dynamic>{
       'buoyBucks': instance.buoyBucks,
       'cardLockStatus': instance.cardLockStatus,
       'programMembership': instance.programMembership,
-      'transactions': instance.transactions
+      'transactions': instance.transactions,
+      'activeTransaction': instance.activeTransaction
     };

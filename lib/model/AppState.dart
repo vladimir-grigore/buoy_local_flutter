@@ -12,6 +12,7 @@ class AppState {
   final bool cardLockStatus;
   final Map<String, dynamic> programMembership;
   final List transactions;
+  final Map<String, dynamic> activeTransaction;
 
   AppState({
     this.tabIndex = 0,
@@ -22,9 +23,12 @@ class AppState {
     this.cardLockStatus = false,
     this.programMembership,
     this.transactions,
+    this.activeTransaction,
   });
 
-  AppState copyWith({int tabIndex, bool isLoading, double points, double redeemed, double buoyBucks, bool cardLockStatus, Map<String, dynamic> programMembership, List transactions}) {
+  AppState copyWith({int tabIndex, bool isLoading, double points, double redeemed, double buoyBucks, 
+    bool cardLockStatus, Map<String, dynamic> programMembership, 
+    List transactions, Map<String, dynamic>activeTransaction}) {
     return new AppState(
       tabIndex: tabIndex ?? this.tabIndex,
       isLoading: isLoading ?? this.isLoading,
@@ -34,6 +38,7 @@ class AppState {
       cardLockStatus: cardLockStatus ?? this.cardLockStatus,
       programMembership: programMembership ?? this.programMembership,
       transactions: transactions ?? this.transactions,
+      activeTransaction: activeTransaction ?? this.activeTransaction,
     );
   }
 
