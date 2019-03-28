@@ -36,7 +36,7 @@ class _TransactionsPage extends State<TransactionsPage> {
                 itemCount: transactions.length,
                 itemBuilder: (BuildContext context, int index) {
                   if(transactions != null) {
-                    return TransactionListItem(transactions:transactions, index: index);
+                    return TransactionListItem(transactions: transactions, index: index);
                   }
                 },
               ),
@@ -112,7 +112,7 @@ class TransactionListItem extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => TransactionDetails(index)),
+            MaterialPageRoute(builder: (context) => TransactionDetailsPage(index)),
           );
         },
         child: Padding(

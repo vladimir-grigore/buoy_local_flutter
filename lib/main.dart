@@ -4,6 +4,8 @@ import 'package:redux/redux.dart';
 import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 import 'dart:io' show Platform;
 
+import 'package:flutter/rendering.dart';
+
 import 'package:buoy/model/AppState.dart';
 import 'package:buoy/model/Store.dart';
 import 'package:buoy/app.dart';
@@ -24,6 +26,9 @@ void main() async {
   // Start the debugger with "remotedev --port 8000"
   remoteDevtools.store = store;
   await remoteDevtools.connect();
+
+  // Used for displaying padding and component dimensions
+  debugPaintSizeEnabled=false;
 
   runApp(MyApp(
     store: store
