@@ -9,6 +9,7 @@ import 'package:buoy/Components/bottom_nav.dart';
 import 'package:buoy/Pages/placeholder_page.dart';
 import 'package:buoy/Pages/transactions_page.dart';
 import 'package:buoy/Pages/home_page.dart';
+import 'package:buoy/Pages/locations_page.dart';
 
 class AppWidget extends StatefulWidget {
   AppWidget({Key key}) : super(key: key);
@@ -27,7 +28,7 @@ class _AppWidgetState extends State<AppWidget> {
 
   final List<Widget> _children = [
     HomePage(),
-    PlaceholderPage(Colors.deepOrange, "Locations page"),
+    LocationsPage(),
     TransactionsPage(),
     PlaceholderPage(Colors.green, "Card page"),
     PlaceholderPage(Colors.lightBlue, "More page"),
