@@ -48,7 +48,7 @@ class _TransactionsPage extends State<TransactionsPage> {
                 if(snapshot.hasData) {    
                   if(snapshot.data != null) {
                     transactions  = snapshot.data['data'];
-
+                    
                     return Container(
                       child: ListView.builder (
                         itemCount: transactions.length,

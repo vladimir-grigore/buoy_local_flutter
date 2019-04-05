@@ -6,10 +6,13 @@ import 'package:buoy/actions/buoy_actions.dart';
 import 'package:buoy/model/Store.dart';
 
 Future<Map> getTransactions() async {
-  var host = "api.paywith.127.0.0.1.nip.io:3200";
+  // When using localhost
+  // var host = "api.paywith.127.0.0.1.nip.io:3200";
+  var host = 'staging-app.paywith.com';
 
   if(Platform.isAndroid){
-    host = 'api.paywith.10.0.2.2.nip.io:3200';
+    // When using localhost
+    // host = 'api.paywith.10.0.2.2.nip.io:3200';
   }
 
   http.Response response = await http.get(
