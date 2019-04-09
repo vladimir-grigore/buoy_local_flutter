@@ -33,8 +33,8 @@ class _LocationsPage extends State<LocationsPage> {
     // If location is received the map will zoom in centering on the device location
     final center = await getUserLocation();
 
-    mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-      target: center == null ? LatLng(0.0, 0.0) : center, zoom: 12.0
+    mapController.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: center == null ? LatLng(0.0, 0.0) : center, zoom: 14.0
     )));
 
     getNearbyPlaces(center);
@@ -47,7 +47,6 @@ class _LocationsPage extends State<LocationsPage> {
       var currentLocation = await location.getLocation();
       final lat = currentLocation.latitude;
       final lng = currentLocation.longitude;
-      print("$lat,$lng");
       final center = LatLng(lat, lng);
       return center;
     } on Exception {
@@ -61,15 +60,24 @@ class _LocationsPage extends State<LocationsPage> {
       this.errorMessage = null;
     });
 
-    final location = Location(center.latitude, center.latitude);
-    final result = await _places.searchNearbyWithRadius(location, 2500);
+    final location = Location(center.latitude, center.longitude);
+    final result = await _places.searchNearbyWithRadius(location, 500);
 
     setState(() {
       this.isLoading = false;
       if(result.status == 'OK') {
         this.places = result.results;
         result.results.forEach((f) {
-          // TODO: add markers to _markers
+          _markers.add(
+            Marker(
+              markerId: MarkerId(f.hashCode.toString()),
+              position: LatLng(f.geometry.location.lat, f.geometry.location.lng),
+              infoWindow: InfoWindow(
+                title: f.name,
+              ),
+              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
+            )
+          );
         });
       } else {
         this.errorMessage = result.errorMessage;
@@ -79,6 +87,16 @@ class _LocationsPage extends State<LocationsPage> {
 
   @override
   Widget build(BuildContext context) {
+    Widget expandedChild;
+
+    if(isLoading) {
+      expandedChild = Center(child: CircularProgressIndicator(value: null));
+    } else if(errorMessage != null) {
+      expandedChild = Center(child: Text(errorMessage));
+    } else {
+      expandedChild = buildPlacesList();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Locations"),
@@ -98,8 +116,64 @@ class _LocationsPage extends State<LocationsPage> {
               ),
             ),
           ),
+          Expanded(child: expandedChild),
         ],
       ),
     );
+  }
+
+  ListView buildPlacesList() {
+    final placesWidget = places.map((f) {
+      List<Widget> list = [
+        Padding(
+          padding: EdgeInsets.only(bottom: 4.0),
+          child: Text(f.name, style: Theme.of(context).textTheme.subtitle),
+        )
+      ];
+
+      if(f.formattedAddress != null) {
+        list.add(Padding(
+          padding: EdgeInsets.only(bottom: 2.0),
+          child: Text(f.formattedAddress, style: Theme.of(context).textTheme.subtitle),
+        ));
+      }
+
+      if(f.vicinity != null) {
+        list.add(Padding(
+          padding: EdgeInsets.only(bottom: 2.0),
+          child: Text(f.vicinity, style: Theme.of(context).textTheme.body1),
+        ));
+      }
+
+      if(f.types?.first != null) {
+        list.add(Padding(
+          padding: EdgeInsets.only(bottom: 2.0),
+          child: Text(f.types.first, style: Theme.of(context).textTheme.caption),
+        ));
+      }
+
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+        child: Card(
+          child: InkWell(
+            onTap: () {
+              // showDetailPlace(f.placeId);
+            },
+            highlightColor: Colors.indigoAccent,
+            splashColor: Colors.red,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: list,
+              ),
+            ),
+          ),
+        ),
+      );
+    }).toList();
+
+    return ListView(shrinkWrap: true, children: placesWidget);
   }
 }
