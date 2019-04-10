@@ -1,11 +1,14 @@
 import 'dart:async';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:location/location.dart' as LocationManager;
 
-const kGoogleApiKey = "AIzaSyCDJdRx5tLyIPfpUBSChJ5mmkfzjad9sWA";
+import 'package:buoy/Components/place_detail_widget.dart';
+
+var kGoogleApiKey = DotEnv().env['GOOGLE_PLACES_API_KEY'];
 GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 class LocationsPage extends StatefulWidget {
   LocationsPage({Key key}) : super(key: key);
@@ -19,6 +22,7 @@ class _LocationsPage extends State<LocationsPage> {
   GoogleMapController mapController;
   List<PlacesSearchResult> places = [];
   final Set<Marker> _markers = {};
+  final homeScaffoldKey = GlobalKey<ScaffoldState>();
   bool isLoading = false;
   String errorMessage;
 
@@ -74,6 +78,7 @@ class _LocationsPage extends State<LocationsPage> {
               position: LatLng(f.geometry.location.lat, f.geometry.location.lng),
               infoWindow: InfoWindow(
                 title: f.name,
+                snippet: f.types?.first,
               ),
               icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
             )
@@ -83,6 +88,40 @@ class _LocationsPage extends State<LocationsPage> {
         this.errorMessage = result.errorMessage;
       }
     });
+  }
+
+  void onError(PlacesAutocompleteResponse response) {
+    homeScaffoldKey.currentState.showSnackBar(
+      SnackBar(content: Text(response.errorMessage))
+    );
+  }
+
+  Future<void> _handlePressButton() async {
+    try {
+      final center = await getUserLocation();
+      Prediction p = await PlacesAutocomplete.show(
+        context: context,
+        strictbounds: center == null ? false : true,
+        apiKey: kGoogleApiKey,
+        onError: onError,
+        mode: Mode.overlay,
+        language: "en",
+        location: center == null ? null : Location(center.latitude, center.longitude),
+        radius: center == null ? null : 10000
+      );
+
+      showDetailsPlace(p.placeId);
+    } catch (e) {
+      return;
+    }
+  }
+
+  Future<Null> showDetailsPlace(String placeId) async {
+    if(placeId != null) {
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => PlaceDetailWidget(placeId: placeId)
+      ));
+    }
   }
 
   @override
@@ -98,9 +137,16 @@ class _LocationsPage extends State<LocationsPage> {
     }
 
     return Scaffold(
+      key: homeScaffoldKey,
       appBar: AppBar(
         title: Text("Locations"),
         backgroundColor: Colors.indigo.shade700,
+        actions: <Widget>[
+          isLoading 
+            ? IconButton(icon: Icon(Icons.timer), onPressed: () {}) 
+            : IconButton(icon: Icon(Icons.refresh), onPressed: () {refresh();}),
+            IconButton(icon: Icon(Icons.search), onPressed: () {_handlePressButton();})
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -122,6 +168,7 @@ class _LocationsPage extends State<LocationsPage> {
     );
   }
 
+  // Builds the Google places scroll list
   ListView buildPlacesList() {
     final placesWidget = places.map((f) {
       List<Widget> list = [
@@ -157,7 +204,7 @@ class _LocationsPage extends State<LocationsPage> {
         child: Card(
           child: InkWell(
             onTap: () {
-              // showDetailPlace(f.placeId);
+              showDetailsPlace(f.placeId);
             },
             highlightColor: Colors.indigoAccent,
             splashColor: Colors.red,

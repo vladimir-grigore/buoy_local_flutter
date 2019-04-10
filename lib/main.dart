@@ -5,6 +5,7 @@ import 'package:redux_remote_devtools/redux_remote_devtools.dart';
 import 'dart:io' show Platform;
 import 'package:device_info/device_info.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:buoy/model/AppState.dart';
 import 'package:buoy/model/Store.dart';
@@ -35,7 +36,8 @@ selectHost() async {
   }
 }
 
-void main() async {
+Future main() async {
+  await DotEnv().load('.env');
   // Remote dev tools is used for Redux debugging in the browser
   // Start the debugger with "remotedev --port 8000"
   selectHost();
@@ -45,7 +47,7 @@ void main() async {
 
   runApp(MyApp(
     store: store
-  ));
+  ));  
 }
 
 class MyApp extends StatelessWidget {
