@@ -155,7 +155,7 @@ class _LocationsPage extends State<LocationsPage> {
         children: <Widget>[
           Container(
             child: SizedBox(
-              height: 200.0,
+              height: 250.0,
               child: GoogleMap(
                 onMapCreated: _onMapCreated,
                 markers: _markers,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -69,6 +70,99 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
     return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${kGoogleApiKey}";
   }
 
+  // The place details has a horizontal image scroll list followed by other details
+  ListView buildPlaceDetailsList(PlaceDetails placeDetails) {
+    List<Widget> list = [];
+
+    if(placeDetails.photos != null) {
+      final photos = placeDetails.photos;
+
+      list.add(SizedBox(
+        height: 100.0,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: photos.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.only(right: 1.0),
+              child: SizedBox(
+                height: 150,
+                child: Image.network(
+                  buildPhotoURL(photos[index].photoReference)
+                ),
+              ),
+            );
+          },
+        ),
+      ));
+    }
+
+    list.add(Padding(
+      padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
+      child: Text(placeDetails.name, style: Theme.of(context).textTheme.headline),
+    ));
+
+    if(placeDetails.formattedAddress != null) {
+      list.add(Padding(
+        padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
+        child: Text(placeDetails.formattedAddress, style: Theme.of(context).textTheme.subhead),
+      ));
+    }
+
+    if(placeDetails.types?.first != null) {
+      list.add(Padding(
+        padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
+        child: Text(placeDetails.types.first.toUpperCase(), style: Theme.of(context).textTheme.caption),
+      ));
+    }
+
+    if(placeDetails.formattedPhoneNumber != null) {
+      list.add(Padding(
+        padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
+        child: Text(placeDetails.formattedPhoneNumber, style: Theme.of(context).textTheme.button),
+      ));
+    }
+
+    if(placeDetails.openingHours != null) {
+      final openingHours = placeDetails.openingHours;
+      var text = openingHours.openNow ? "Open Now" : "Closed";
+
+      list.add(Padding(
+        padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
+        child: Text(text, style: Theme.of(context).textTheme.caption),
+      ));
+    }
+
+    if(placeDetails.website != null) {
+      list.add(Padding(
+        padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
+        child: Linkify(
+          onOpen: (url) async {
+            if(await canLaunch(placeDetails.website)) {
+              await launch(placeDetails.website);
+            } else {
+              throw "Could not launch ${placeDetails.website}";
+            }
+          },
+          text: placeDetails.website, 
+          style: Theme.of(context).textTheme.body2
+        ),
+      ));
+    }
+
+    if(placeDetails.rating != null) {
+      list.add(Padding(
+        padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
+        child: Text("Rating: ${placeDetails.rating}", style: Theme.of(context).textTheme.caption),
+      ));
+    }
+
+    return ListView(
+      shrinkWrap: true,
+      children: list,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget bodyChild;
@@ -92,7 +186,7 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
         children: <Widget>[
           Container(
             child: SizedBox(
-              height: 200.0,
+              height: 250.0,
               child: GoogleMap(
                 onMapCreated: _onMapCreated,
                 markers: marker,
@@ -103,8 +197,7 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
             ),
           ),
           Expanded(
-            // child: buildPlaceDetailsList(placeDetails),
-            child: Center(child: Text("In progress"))
+            child: buildPlaceDetailsList(placeDetails),
           )
         ],
       );
