@@ -6,7 +6,7 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:location/location.dart' as LocationManager;
 
-import 'package:buoy/Components/place_detail_widget.dart';
+import 'package:buoy/Pages/place_detail_page.dart';
 
 var kGoogleApiKey = DotEnv().env['GOOGLE_PLACES_API_KEY'];
 GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
@@ -58,6 +58,7 @@ class _LocationsPage extends State<LocationsPage> {
     }
   }
 
+  // Build a list of google places and store it in the _markers set
   void getNearbyPlaces(LatLng center) async {
     setState(() {
       this.isLoading = true;
@@ -80,7 +81,7 @@ class _LocationsPage extends State<LocationsPage> {
                 title: f.name,
                 snippet: f.types?.first,
               ),
-              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
+              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
             )
           );
         });
@@ -96,6 +97,7 @@ class _LocationsPage extends State<LocationsPage> {
     );
   }
 
+  // Googple places search functionality
   Future<void> _handlePressButton() async {
     try {
       final center = await getUserLocation();
@@ -116,10 +118,11 @@ class _LocationsPage extends State<LocationsPage> {
     }
   }
 
+  // Redirect to the place details page
   Future<Null> showDetailsPlace(String placeId) async {
     if(placeId != null) {
       Navigator.push(context, MaterialPageRoute(
-        builder: (context) => PlaceDetailWidget(placeId: placeId)
+        builder: (context) => PlaceDetailPage(placeId: placeId)
       ));
     }
   }
