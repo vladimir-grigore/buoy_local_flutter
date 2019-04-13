@@ -5,6 +5,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'package:buoy/Components/opening_hours_dropdown.dart';
+
 var kGoogleApiKey = DotEnv().env['GOOGLE_PLACES_API_KEY'];
 GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
@@ -67,7 +69,7 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
   }
 
   String buildPhotoURL(String photoReference) {
-    return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${kGoogleApiKey}";
+    return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=$kGoogleApiKey";
   }
 
   // The place details has a horizontal image scroll list followed by other details
@@ -123,14 +125,41 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
       ));
     }
 
+    // Display opening hours in an expansion panel
     if(placeDetails.openingHours != null) {
       final openingHours = placeDetails.openingHours;
       var text = openingHours.openNow ? "Open Now" : "Closed";
+      List<Widget>hours = [];
 
-      list.add(Padding(
-        padding: EdgeInsets.only(top: 4.0, left: 8.0, right: 8.0, bottom: 4.0),
-        child: Text(text, style: Theme.of(context).textTheme.caption),
-      ));
+      openingHours.weekdayText.forEach((day){
+        hours.add(
+          Padding(
+            padding: EdgeInsets.all(5.0),
+            child: Text(day),
+          )
+        );
+      });
+
+      List<OpenHours> items = <OpenHours>[
+        OpenHours(false, text,
+          Column(
+            children: hours,
+          )
+        ),
+      ];
+
+      list.add(
+        SingleChildScrollView(
+          child: SafeArea(
+            top: false,
+            bottom: false,
+            child: Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 100),
+              child: OpeningHoursDropdown(openingHours: items),
+            ),
+          ),
+        )
+      );
     }
 
     if(placeDetails.website != null) {
