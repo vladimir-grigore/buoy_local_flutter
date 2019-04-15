@@ -15,7 +15,8 @@ class RedeemPage extends StatelessWidget {
       builder: (BuildContext context, ViewModel vm) {
         return new Container(
           color: Colors.white,
-          child: Column(
+          child: ListView(
+            shrinkWrap: true,
             children: <Widget>[
               Stack(
                 alignment: Alignment.bottomCenter,
@@ -52,8 +53,7 @@ class RedeemPage extends StatelessWidget {
                 ],
               ),
               Container(
-                padding: EdgeInsets.only(top: 10),
-                width: MediaQuery.of(context).size.width * 0.75,
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
                 child: Slider(
                   min: 0.0,
                   max: vm.points,
@@ -63,7 +63,10 @@ class RedeemPage extends StatelessWidget {
                   },
                 ),
               ),
-              RedeemPointsModal(),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 80.0),
+                child: RedeemPointsModal(),
+              ),
               LearnMoreModal(),
             ],
           ),
