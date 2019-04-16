@@ -5,6 +5,7 @@ import 'package:buoy/Components/buoy_local_card.dart';
 import 'package:buoy/Components/buoy_bucks.dart';
 import 'package:buoy/model/AppState.dart';
 import 'package:buoy/api/get_program_membership.dart';
+import 'package:buoy/Pages/offers_list_page.dart';
 
 class EarnPage extends StatelessWidget {
 
@@ -60,8 +61,12 @@ class EarnPage extends StatelessWidget {
             builder: (_, fetchApiDataCallback) {
               return new GestureDetector(
                 onTap: (){ 
-                  print("Find Deals button pressed");
-                  fetchApiDataCallback();
+                  // Example of api call through Thunk middleware
+                  // fetchApiDataCallback();
+
+                  Navigator.push(context, MaterialPageRoute<void>(
+                    builder: (BuildContext context) { return OffersListPage(); }
+                  ));
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 10.0),
