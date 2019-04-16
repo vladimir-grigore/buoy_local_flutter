@@ -45,9 +45,9 @@ class _TransactionsPage extends State<TransactionsPage> {
             return FutureBuilder(
               future: getTransactions(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if(snapshot.hasData) {    
+                if(snapshot.hasData) {
                   if(snapshot.data != null) {
-                    transactions  = snapshot.data['data'];
+                    transactions = snapshot.data['data'];
                     
                     return Container(
                       child: ListView.builder (

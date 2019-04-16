@@ -37,3 +37,9 @@ class UpdateTabIndexAction {
 
   UpdateTabIndexAction(this.newIndex);
 }
+
+class UpdateOffersAction {
+  final Map<String, dynamic> result;
+
+  UpdateOffersAction(this.result);
+}

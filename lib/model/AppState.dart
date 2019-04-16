@@ -10,9 +10,10 @@ class AppState {
   final double redeemed;
   final double buoyBucks;
   final bool cardLockStatus;
-  final Map<String, dynamic> programMembership;
   final List transactions;
+  final Map<String, dynamic> programMembership;
   final Map<String, dynamic> activeTransaction;
+  final List offers;
 
   AppState({
     this.tabIndex = 0,
@@ -24,10 +25,11 @@ class AppState {
     this.programMembership,
     this.transactions,
     this.activeTransaction,
+    this.offers,
   });
 
   AppState copyWith({int tabIndex, bool isLoading, double points, double redeemed, double buoyBucks, 
-    bool cardLockStatus, Map<String, dynamic> programMembership, 
+    bool cardLockStatus, Map<String, dynamic> programMembership, List offers,
     List transactions, Map<String, dynamic>activeTransaction}) {
     return new AppState(
       tabIndex: tabIndex ?? this.tabIndex,
@@ -39,6 +41,7 @@ class AppState {
       programMembership: programMembership ?? this.programMembership,
       transactions: transactions ?? this.transactions,
       activeTransaction: activeTransaction ?? this.activeTransaction,
+      offers: offers ?? this.offers,
     );
   }
 

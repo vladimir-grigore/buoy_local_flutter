@@ -16,14 +16,17 @@ class ViewModel {
   final Function(double) modifySlider;
   final Function(double) redeemPoints;
   final Function(dynamic) updateTransactions;
+  final Function(dynamic) updateOffers;
   final Map<String, dynamic> programMemnership;
-  final List transactions;
   final Map<String, dynamic> activeTransaction;
+  final List offers;
+  final List transactions;
 
   ViewModel({
     this.tabIndex,
     this.isLoading,
-    this.points, 
+    this.points,
+    this.offers,
     this.redeemed,
     this.buoyBucks,
     this.modifySlider,
@@ -32,6 +35,7 @@ class ViewModel {
     this.toggleLoadingScreen,
     this.redeemPoints,
     this.updateTransactions,
+    this.updateOffers,
     this.programMemnership,
     this.transactions,
     this.activeTransaction,
@@ -48,11 +52,13 @@ class ViewModel {
       programMemnership: store.state.programMembership,
       transactions: store.state.transactions,
       activeTransaction: store.state.activeTransaction,
+      offers: store.state.offers,
       toggleLoadingScreen: () { store.dispatch(new ToggleLoadingScreenAction()); },
       toggleSwitch: () { store.dispatch(new ToggleBuoyCardLockAction()); },
       modifySlider: (newValue) { store.dispatch(new PointsSliderAction(newValue)); },
       redeemPoints: (redeemed) { store.dispatch(new RedeemPointsAction(redeemed)); },
-      updateTransactions: (transactions) { store.dispatch(new UpdateTransactionsAction(transactions));} ,
+      updateTransactions: (transactions) { store.dispatch(new UpdateTransactionsAction(transactions)); },
+      updateOffers: (offers) { store.dispatch(new UpdateOffersAction(offers)); },
     );
   }
 }
