@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import 'package:buoy/model/AppState.dart';
-import 'package:buoy/Components/view_model.dart';
 import 'package:buoy/api/get_offers.dart';
+import 'package:buoy/Components/view_model.dart';
 import 'package:buoy/Components/location_dropdown.dart';
+import 'package:buoy/Components/categorized_offers.dart';
 
 class OffersListPage extends StatefulWidget {
   OffersListPage({Key key}) : super(key: key);
@@ -33,8 +34,8 @@ class _OffersListPage extends State<OffersListPage> {
             return Column(
               children: <Widget>[
                 LocationDropdown(),
-                Center(
-                  child: Text(offers.toString()),
+                Expanded(
+                  child: CategorizedOffers(offers: offers),
                 ),
               ],
             );
@@ -49,8 +50,8 @@ class _OffersListPage extends State<OffersListPage> {
                     return Column(
                       children: <Widget>[
                         LocationDropdown(),
-                        Center(
-                          child: Text(offers.toString()),
+                        Expanded(
+                          child: CategorizedOffers(offers: offers),
                         ),
                       ],
                     );
