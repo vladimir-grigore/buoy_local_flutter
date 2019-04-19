@@ -84,7 +84,7 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: photos.length,
-          itemBuilder: (context, index) {
+          itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: EdgeInsets.only(right: 1.0),
               child: SizedBox(

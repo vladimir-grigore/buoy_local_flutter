@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:buoy/Components/featured_offers.dart';
+import 'package:buoy/Components/offers_horizontal_list.dart';
 
 class CategorizedOffers extends StatelessWidget {
   List offers;
@@ -34,8 +35,15 @@ class CategorizedOffers extends StatelessWidget {
     if(categorizedOffers['eat'] != null) {
       list.add(
         Padding(
+          padding: EdgeInsets.only(left: 20.0, top: 10.0),
+          child: Text("EAT"),
+        ),
+      );
+
+      list.add(
+        Padding(
           padding: EdgeInsets.all(10.0),
-          child: Text("EAT: ${categorizedOffers['eat']}"),
+          child: OffersHorizontalList(offersList: categorizedOffers['eat']),
         ),
       );
     }
@@ -43,8 +51,15 @@ class CategorizedOffers extends StatelessWidget {
     if(categorizedOffers['shop'] != null) {
       list.add(
         Padding(
+          padding: EdgeInsets.only(left: 20.0, top: 10.0),
+          child: Text("SHOP"),
+        ),
+      );
+
+      list.add(
+        Padding(
           padding: EdgeInsets.all(10.0),
-          child: Text("SHOP: ${categorizedOffers['shop']}"),
+          child: OffersHorizontalList(offersList: categorizedOffers['shop']),
         ),
       );
     }
@@ -52,12 +67,18 @@ class CategorizedOffers extends StatelessWidget {
     if(categorizedOffers['play'] != null) {
       list.add(
         Padding(
+          padding: EdgeInsets.only(left: 20.0, top: 10.0),
+          child: Text("PLAY"),
+        ),
+      );
+
+      list.add(
+        Padding(
           padding: EdgeInsets.all(10.0),
-          child: Text("PLAY: ${categorizedOffers['play']}"),
+          child: OffersHorizontalList(offersList: categorizedOffers['play']),
         ),
       );
     }
-
 
     return list;
   }

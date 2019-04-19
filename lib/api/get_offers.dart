@@ -7,12 +7,12 @@ import 'package:buoy/model/Store.dart';
 
 Future<Map> getOffers({location='Greater Bangor'}) async {
   // When using localhost
-  // var host = "api.paywith.127.0.0.1.nip.io:3200";
-  var host = 'staging-app.paywith.com';
+  var host = "api.paywith.127.0.0.1.nip.io:3200";
+  // var host = 'staging-app.paywith.com';
 
   if(Platform.isAndroid){
     // When using localhost
-    // host = 'api.paywith.10.0.2.2.nip.io:3200';
+    host = 'api.paywith.10.0.2.2.nip.io:3200';
   }
 
   String getLocationId(location) {
