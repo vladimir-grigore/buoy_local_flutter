@@ -4,7 +4,7 @@ import 'package:buoy/Components/featured_offers.dart';
 import 'package:buoy/Components/offers_horizontal_list.dart';
 
 class CategorizedOffers extends StatelessWidget {
-  List offers;
+  final List offers;
   CategorizedOffers({Key key, this.offers}) : super(key: key);
 
   categorizeOffers(offers) {
