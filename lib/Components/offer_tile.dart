@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_image/network.dart';
 
 class OfferTile extends StatelessWidget {
   final Map<String, dynamic> offer;
@@ -25,8 +26,8 @@ class OfferTile extends StatelessWidget {
             child: Container(
               color: Colors.white,
               height: 300,
-              child: Image.network(
-                offer['attributes']['thumbnail']['default'],
+              child: Image(
+                image: NetworkImageWithRetry(offer['attributes']['thumbnail']['default']),
                 fit: BoxFit.fitHeight,
                 width: 150.0,
               ),
@@ -64,8 +65,5 @@ class OfferTile extends StatelessWidget {
         ],
       ),
     );
-    
-    
-    
   }
 }

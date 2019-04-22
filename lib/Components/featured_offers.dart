@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
+import 'package:flutter_image/network.dart';
 
 class FeaturedOffers extends StatelessWidget {
   final List featuredOffers;
@@ -19,8 +20,10 @@ class FeaturedOffers extends StatelessWidget {
               children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image.network(
-                    featuredOffers[index]['attributes']['image']['default'],
+                  child: Image(
+                    image: NetworkImageWithRetry(
+                      featuredOffers[index]['attributes']['image']['default']
+                    ),
                     fit: BoxFit.fitWidth,
                     width: MediaQuery.of(context).size.width,
                   ),
