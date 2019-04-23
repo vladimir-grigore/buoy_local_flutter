@@ -57,6 +57,7 @@ Future<Map> getOffers({location='Greater Bangor'}) async {
         "Content-type": "application/json", "Accept": "application/json"
       },
     );
+    
     Map<String, dynamic> result = json.decode(response.body);
     store.dispatch(new UpdateOffersAction(result));
 

@@ -43,3 +43,9 @@ class UpdateOffersAction {
 
   UpdateOffersAction(this.result);
 }
+
+class UpdateOfferLocationAction {
+  final Map<String, dynamic> result;
+
+  UpdateOfferLocationAction(this.result);
+}

@@ -20,6 +20,8 @@ AppState appReducer(AppState state, action) {
     return updateActiveTransactionData(state, action);
   } else if (action is UpdateOffersAction) {
     return updateOffersData(state, action);
+  } else if (action is UpdateOfferLocationAction) {
+    return updateOffeLocationData(state, action);
   } else {
     return state;
   }
@@ -68,4 +70,8 @@ AppState updateActiveTransactionData(AppState state, UpdateActiveTransactionActi
 
 AppState updateOffersData(AppState state, UpdateOffersAction action){
   return state.copyWith(offers: action.result['data']);
+}
+
+AppState updateOffeLocationData(AppState state, UpdateOfferLocationAction action){
+  return state.copyWith(offerLocation: action.result['data']);
 }

@@ -199,7 +199,7 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
 
     if (isLoading) {
       title = "Loading";
-      bodyChild = Center(child: CircularProgressIndicator(value: null));
+      bodyChild = Center(child: CircularProgressIndicator());
     } else if (errorLoading != null) {
       title = "";
       bodyChild = Center(child: Text(errorLoading));

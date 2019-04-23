@@ -17,7 +17,8 @@ AppState _$AppStateFromJson(Map<String, dynamic> json) {
       programMembership: json['programMembership'] as Map<String, dynamic>,
       transactions: json['transactions'] as List,
       activeTransaction: json['activeTransaction'] as Map<String, dynamic>,
-      offers: json['offers'] as List);
+      offers: json['offers'] as List,
+      offerLocation: json['offerLocation'] as List);
 }
 
 Map<String, dynamic> _$AppStateToJson(AppState instance) => <String, dynamic>{
@@ -30,5 +31,6 @@ Map<String, dynamic> _$AppStateToJson(AppState instance) => <String, dynamic>{
       'transactions': instance.transactions,
       'programMembership': instance.programMembership,
       'activeTransaction': instance.activeTransaction,
+      'offerLocation': instance.offerLocation,
       'offers': instance.offers
     };

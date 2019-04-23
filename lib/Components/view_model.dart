@@ -21,6 +21,7 @@ class ViewModel {
   final Map<String, dynamic> activeTransaction;
   final List offers;
   final List transactions;
+  final List offerLocation;
 
   ViewModel({
     this.tabIndex,
@@ -39,6 +40,7 @@ class ViewModel {
     this.programMemnership,
     this.transactions,
     this.activeTransaction,
+    this.offerLocation,
   });
 
   static ViewModel fromStore(Store<AppState> store) {
@@ -53,6 +55,7 @@ class ViewModel {
       transactions: store.state.transactions,
       activeTransaction: store.state.activeTransaction,
       offers: store.state.offers,
+      offerLocation: store.state.offerLocation,
       toggleLoadingScreen: () { store.dispatch(new ToggleLoadingScreenAction()); },
       toggleSwitch: () { store.dispatch(new ToggleBuoyCardLockAction()); },
       modifySlider: (newValue) { store.dispatch(new PointsSliderAction(newValue)); },
