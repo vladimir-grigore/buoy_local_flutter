@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:buoy/api/get_location.dart';
 import 'package:buoy/Components/opening_hours_dropdown.dart';
+import 'package:buoy/Components/offer_detail_header_image.dart';
 
 var kGoogleApiKey = DotEnv().env['GOOGLE_PLACES_API_KEY'];
 GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
@@ -22,15 +23,18 @@ class _OfferDetailsPage extends State<OfferDetailsPage> {
   String errorLoading;
   PlacesDetailsResponse place;
   bool isLoading = true;
+  Map location;
 
   FutureOr Function(Map value) get onValue => null;
 
   @override
   void initState() {
     getLocation(widget.offer['id']).then((result) {
-      fetchPlaceDetails(result['data'][0]['attributes']['google-place-id']);
+      setState(() {
+        this.location = result['data'][0];
+      });
+      fetchPlaceDetails(location['attributes']['google-place-id']);
     });
-
     super.initState();
   }
 
@@ -53,8 +57,12 @@ class _OfferDetailsPage extends State<OfferDetailsPage> {
     }
   }
 
-  ListView buildOfferDetails(PlaceDetails offerDetails) {
+  ListView buildOfferDetails(PlaceDetails offerDetails, Map offer, Map offerLocation) {
     List<Widget> list = [];
+
+    list.add(
+      OfferDetailHeaderImage(offer: offer, offerLocation: offerLocation)
+    );
 
     // Display opening hours in an expansion panel
     if(offerDetails.openingHours != null) {
@@ -109,12 +117,15 @@ class _OfferDetailsPage extends State<OfferDetailsPage> {
       buildBody = Center(child: Text(errorLoading));
     } else {
       final offerDetails = place.result;
+      final offer = widget.offer;
+      final offerLocation = location;
 
       buildBody = Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-            child: buildOfferDetails(offerDetails),
-          
+            child: buildOfferDetails(offerDetails, offer, offerLocation),
           ),
         ],
       );
