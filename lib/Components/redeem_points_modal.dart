@@ -52,8 +52,8 @@ class RedeemPointsModal extends StatelessWidget {
             color: Theme.of(context).accentColor,
             textColor: Colors.white,
             disabledTextColor: Colors.white,
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-            child: Text("REDEEM POINTS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300)),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Text("REDEEM POINTS", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300)),
           ),
         );
       },

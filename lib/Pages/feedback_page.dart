@@ -39,13 +39,13 @@ class _FeedbackPage extends State<FeedbackPage> {
         } else {
           return Container(
             color: Colors.white,
-            padding: EdgeInsets.all(30.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: ListView(
+              padding: EdgeInsets.only(top: 10.0),
               children: <Widget>[
                 Text("What do you thing of ${vm.activeTransaction['data']['attributes']['merchant-name']}?"),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 15.0),
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
                   child: SmoothStarRating(
                     allowHalfRating: false,
                     onRatingChanged: (val) {
@@ -80,7 +80,7 @@ class _FeedbackPage extends State<FeedbackPage> {
                     textColor: Colors.white,
                     disabledTextColor: Colors.white,
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                    child: Text("REDEEM POINTS", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300)),
+                    child: Text("SEND FEEDBACK", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300)),
                   ),
                 ),
               ],
