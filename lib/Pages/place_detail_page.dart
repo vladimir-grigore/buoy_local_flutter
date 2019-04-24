@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:buoy/Components/opening_hours_dropdown.dart';
+import 'package:buoy/Components/location_details_map.dart';
 
 var kGoogleApiKey = DotEnv().env['GOOGLE_PLACES_API_KEY'];
 GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
@@ -19,11 +19,9 @@ class PlaceDetailPage extends StatefulWidget {
 }
 
 class _PlaceDetailState extends State<PlaceDetailPage> {
-  GoogleMapController mapController;
   bool isLoading = false;
   String errorLoading;
   PlacesDetailsResponse place;
-  final Set<Marker> marker = {};
 
   @override
   void initState() {
@@ -49,23 +47,6 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
         }
       });
     }
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    final location = place.result.geometry.location;
-    final center = LatLng(location.lat, location.lng);
-
-    marker.add(
-      Marker(
-        markerId: MarkerId(place.hashCode.toString()),
-        position: center,
-        infoWindow: InfoWindow(
-          title: place.result.name,
-          snippet: place.result.formattedAddress,
-        ),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-      )
-    ); 
   }
 
   String buildPhotoURL(String photoReference) {
@@ -205,8 +186,6 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
       bodyChild = Center(child: Text(errorLoading));
     } else {
       final placeDetails = place.result;
-      final location = place.result.geometry.location;
-      final center = LatLng(location.lat, location.lng);
 
       title = placeDetails.name;
       bodyChild = Column(
@@ -214,16 +193,7 @@ class _PlaceDetailState extends State<PlaceDetailPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
-            child: SizedBox(
-              height: 250.0,
-              child: GoogleMap(
-                onMapCreated: _onMapCreated,
-                markers: marker,
-                initialCameraPosition: CameraPosition(
-                  target: center, zoom: 15.0,
-                ),
-              ),
-            ),
+            child: LocationDetailsMap(place: place, height: 250.0),
           ),
           Expanded(
             child: buildPlaceDetailsList(placeDetails),

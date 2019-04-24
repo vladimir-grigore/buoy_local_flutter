@@ -13,8 +13,8 @@ class OfferDetailHeaderImage extends StatelessWidget {
     offer['attributes']['image']['default'] :
     offer['attributes']['thumbnail']['default'];
 
-    return SizedBox(
-      height: 250,
+    return Container(
+      height: 240,
       child: Stack(
         children: <Widget>[
           Image(
@@ -25,6 +25,7 @@ class OfferDetailHeaderImage extends StatelessWidget {
           ),
           Container(
             width: MediaQuery.of(context).size.width,
+            alignment: Alignment.bottomLeft,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.bottomCenter,
@@ -34,6 +35,7 @@ class OfferDetailHeaderImage extends StatelessWidget {
             ),
             child: Container(
               padding: EdgeInsets.only(left: 20.0, bottom: 30.0),
+              height: 100.0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
