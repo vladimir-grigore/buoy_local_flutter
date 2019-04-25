@@ -43,6 +43,12 @@ dev_dependencies:
   redux_thunk: ^0.2.1
   redux_remote_devtools: ^0.0.4  # Start the debugger with "remotedev --port 8000"
   build_runner: ^1.0.0
+  flutter_launcher_icons: ^0.7.0
+
+flutter_icons:
+  image_path: "images/default_icon.png"
+  android: true
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
